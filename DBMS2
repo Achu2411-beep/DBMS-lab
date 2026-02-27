@@ -1,0 +1,22 @@
+
+
+
+//2
+
+CREATE TABLE persons(personID INT PRIMARY KEY,NAME VARCHAR(50) NOT NULL,Adhar BIGINT NOT NULL UNIQUE,Age INT CHECK(Age>18));
+
+CREATE TABLE orders(orderID INT PRIMARY KEY,orderno INT NOT NULL,personID INT,FOREIGN KEY(personID)REFERENCES persons(personID));
+
+DESCRIBE persons;
+
+Describe orders;
+
+ALTER TABLE employee ADD PRIMARY KEY(emp_no);
+
+ALTER TABLE Department ADD PRIMARY KEY(dep_no);
+
+ALTER TABLE employee ADD CONSTRAINT FK_dept FOREIGN KEY(dep_no)REFERENCES Department(dept_no)ON DELETE CASCADE;
+
+ALTER TABLE orders DROP PRIMARY KEY;
+
+

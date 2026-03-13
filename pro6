@@ -1,0 +1,70 @@
+Step1:Create bill table
+
+ CREATE TABLE bill(
+    customer_id INT,
+    name VARCHAR(50),
+    pre_reading INT,
+    cur_reading INT,
+    unit INT,
+    amount FLOAT
+    );
+Step2:Insert sample data
+
+ insert into bill values (1,'Arun',100,180,NULL,NULL),
+    (2,'Rahul',200,320,NULL,NULL),
+    (3,'Meera',150,240,NULL,NULL),
+    (4,'Anu',300,450,NULL,NULL);
+
+Step3:Create function
+
+DELIMITER //
+
+CREATE PROCEDURE electricity_bill()
+
+BEGIN
+
+UPDATE bill
+SET unit = cur_reading - pre_reading;
+
+UPDATE bill
+SET amount =
+CASE
+
+WHEN unit <= 100
+THEN unit * 2
+
+WHEN unit BETWEEN 101 AND 200
+THEN unit * 2.5
+
+WHEN unit BETWEEN 201 AND 300
+THEN unit * 3
+
+ELSE unit * 4
+
+END;
+
+END //
+
+Step4:Program logic
+
+CALL electricity_bill();
+
+select*from bill;
++-------------+-------+-------------+-------------+------+--------+
+| customer_id | name  | pre_reading | cur_reading | unit | amount |
++-------------+-------+-------------+-------------+------+--------+
+|           1 | Arun  |         100 |         180 |   80 |    160 |
+|           2 | Rahul |         200 |         320 |  120 |    300 |
+|           3 | Meera |         150 |         240 |   90 |    180 |
+|           4 | Anu   |         300 |         450 |  150 |    375 |
++-------------+-------+-------------+-------------+------+--------+
+
+
+
+
+
+
+
+
+
+
